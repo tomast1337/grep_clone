@@ -8,7 +8,18 @@ struct Configuracao {
 }
 
 impl Configuracao {
-    pub fn executar(&self) {}
+    pub fn executar(&self) {
+        match self.comando.as_str() {
+            "primeira" => (),
+            "ultima" => (),
+            "todas" => (),
+            "ajuda" => print_ajuda(),
+            _ => panic!("Erro nos argumentos"),
+        }
+    }
+    fn primeir() {}
+    fn ultima() {}
+    fn todas() {}
 }
 
 fn parser(args: &[String]) -> Configuracao {
