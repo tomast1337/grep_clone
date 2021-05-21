@@ -1,6 +1,5 @@
 use std::env;
 use std::fs;
-use std::error;
 
 struct Configuracao {
     comando: String,
@@ -12,14 +11,18 @@ impl Configuracao {
     pub fn executar(&self) {}
 }
 
-fn parser(args: &[String]) -> Result<Configuracao, error> {
-    if args.len() != 4 {
-        Err(e)
+fn parser(args: &[String]) -> Configuracao {
+    if args.len() < 4 {
+        panic!("Erro nos parâmetros utilize grep_clone --ajuda para ver como se utiliza o programa ")
     } else {
         let comando: String = args[1].clone();
         let arquivo: String = args[1].clone();
         let argumento: String = args[1].clone();
-        OK(Configuracao { comando, arquivo, argumento })
+        match comando.as_str() {
+            "primeira" | "ultima" | "todas" | "ajuda" => (),
+            _ => panic!("Erro no primeiro parâmetro"),
+        }
+        Configuracao { comando, arquivo, argumento }
     }
 }
 
@@ -34,9 +37,5 @@ fn print_ajuda() {
 fn main() {
     let args: Vec<String> = env::args().collect();
     let config = parser(&args);
-    if config.is_err() {
-        print_ajuda()
-    } else {
-        config.unwrap().executar()
-    }
+    config.executar()
 }
