@@ -20,6 +20,9 @@ impl Configuracao {
     fn primeir() {}
     fn ultima() {}
     fn todas() {}
+    fn get_conteudo(arquivo: String) -> String {
+        fs::read_to_string(arquivo).expect("Erro ao abrir o arquivo");
+    }
 }
 
 fn parser(args: &[String]) -> Configuracao {
